@@ -1,16 +1,15 @@
-# If we are on RENDER, we will be using these settings.
-# If we are not and on a local computer, we will use the settings that isn't tied to this file.
-
 import os
 import dj_database_url
 from .settings import *
 from .settings import BASE_DIR
 
-ALLOWED_HOSTS [os.environ.get['RENDER_EXTERNAL_HOSTNAME']]
-CORS_ALLOWED_ORIGINS = ['https//'+os.environ.get['RENDER_EXTERNAL_HOSTNAME']]
-                                                 
+# Correct ALLOWED_HOSTS and CORS_ALLOWED_ORIGINS
+ALLOWED_HOSTS = [os.environ.get('RENDER_EXTERNAL_HOSTNAME', '*')]
+CORS_ALLOWED_ORIGINS = ['https://' + os.environ.get('RENDER_EXTERNAL_HOSTNAME', '')]
+
+# Set DEBUG and SECRET_KEY safely
 DEBUG = False
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-secret-key')  # Provide a fallback for local development
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
@@ -25,19 +24,20 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# CORS_ALLOWED_ORIGINS = ['']
-
+# Ensure STORAGES is properly formatted
 STORAGES = {
-    "default":
-        "BACKEND" : "django.core.files.storage.FileSystemStorage",
-        },
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
     "staticfiles": {
-        "BACKEND" : "whitenoise.storage.CompressedStaticFilesStorage", 
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage", 
     }
-    
+}
+
+# Configure DATABASES safely with a fallback
 DATABASES = {
     'default': dj_database_url.config(
-        default = os.environ['DATABASE_URL'],
+        default=os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3'),  # Use SQLite as fallback for local development
         conn_max_age=600
     )
 }
