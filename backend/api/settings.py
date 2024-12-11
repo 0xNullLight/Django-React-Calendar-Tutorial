@@ -66,6 +66,9 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173'
 ]
 
+# Required for Render
+STATIC_ROOT = BASE_DIR/"staticfiles"
+
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
