@@ -33,8 +33,7 @@ STORAGES = {
         },
     "staticfiles": {
         "BACKEND" : "whitenoise.storage.CompressedStaticFilesStorage", 
-    },
-}
+    }
     
 DATABASES = {
     'default': dj_database_url.config(
