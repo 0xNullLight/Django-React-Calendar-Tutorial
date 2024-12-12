@@ -11,10 +11,10 @@ python manage.py migrate
 # It can also act as a placeholder in documentation or templates where users are expected to substitute their own values.
 
 # useful for Render when creating a superuser
-if [[$CREATE_SUPERUSER]];
-then
-    python manage.py createsuperuser --no-input
-fi
+# if [[$CREATE_SUPERUSER]];
+# then
+#     python manage.py createsuperuser --no-input
+# fi
 
 # Envrionment Variables that would be useful on Render:
 #
