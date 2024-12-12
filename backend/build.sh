@@ -18,7 +18,7 @@ fi
 
 # Envrionment Variables that would be useful on Render:
 #
-# CREATE_SUPERUSER
+# CREATE_SUPERUSER (TRUE)
 # DATABASE_URL (This is the "Internal Database URL" after creating it on Render)
 # DJANGO_SUPERUSER_EMAIL
 # DJANGO_SUPERUSER_PASSWORD
